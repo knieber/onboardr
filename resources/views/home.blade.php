@@ -21,7 +21,7 @@
                     <div class="panel-heading">{{$role->name }}</div>
                     <div class="panel-body">
 
-                        <a class="btn btn-default" href="#" role="button">Add An App</a>
+                        <a class="btn btn-default" href="{{ url("/app/roles/$role->id/apps") }}" role="button">Add An App</a>
                     </div>
                 </div>
             @endforeach

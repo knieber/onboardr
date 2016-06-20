@@ -15,6 +15,10 @@ class RolesController extends Controller
      */
     private $roleRepository;
 
+    /**
+     * RolesController constructor.
+     * @param RoleRepository $roleRepository
+     */
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
