@@ -3,6 +3,7 @@
 namespace Onboardr\Organizations;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Onboardr\Apps\App;
 use Onboardr\Roles\Role;
 
 class Organization extends Authenticatable
@@ -32,6 +33,14 @@ class Organization extends Authenticatable
      */
     public function roles()
     {
-        return $this->hasMany('Onboardr\Roles\Role');
+        return $this->hasMany(Role::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function apps()
+    {
+        return $this->belongsToMany(App::class);
     }
 }

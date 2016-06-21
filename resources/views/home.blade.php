@@ -20,7 +20,12 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{$role->name }}</div>
                     <div class="panel-body">
-
+                        <strong>Apps:</strong>
+                        <ul>
+                            @foreach($role->apps as $app)
+                                <li>{{$app->name}}</li>
+                            @endforeach
+                        </ul>
                         <a class="btn btn-default" href="{{ url("/app/roles/$role->id/apps") }}" role="button">Add An App</a>
                     </div>
                 </div>

@@ -7,18 +7,48 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add An App for <strong>{{$role->name}}</strong></div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/app/roles') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/app/roles/$role->id/apps") }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                            <div class="form-group{{ $errors->has('app') ? ' has-error' : '' }}">
+                                <label for="app" class="col-md-4 control-label">App</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                    <select id="app" class="form-control" name="app" required>
+                                        <option value="GitHub">GitHub</option>
+                                    </select>
 
                                     @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="app_email" class="col-md-4 control-label">App Admin Email Address</label>
+
+                                <div class="col-md-6">
+                                    <input id="app_email" type="email" class="form-control" name="app_email" value="{{ old('email') }}">
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('app_password') ? ' has-error' : '' }}">
+                                <label for="app_password" class="col-md-4 control-label">App Admin Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="app_password" type="password" class="form-control" name="app_password">
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -13,5 +13,7 @@ Route::group([
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
     Route::resource('/roles', 'RolesController');
+
     Route::get('/roles/{roleId}/apps', 'AppsController@create');
+    Route::post('/roles/{roleId}/apps', 'AppsController@store');
 });

@@ -155,6 +155,7 @@ return [
         Onboardr\Providers\AuthServiceProvider::class,
         Onboardr\Providers\EventServiceProvider::class,
         Onboardr\Providers\RouteServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 
