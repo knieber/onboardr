@@ -5,20 +5,20 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create A Role</div>
+                    <div class="panel-heading">Enter Your Organizations Key</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/app/organization/$orgId/roles") }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/app/organization/join') }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                            <div class="form-group{{ $errors->has('key') ? ' has-error' : '' }}">
+                                <label for="key" class="col-md-4 control-label">Key</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                    <input id="key" type="password" class="form-control" name="key">
 
-                                    @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                    @if ($errors->has('key'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('key') }}</strong>
                                     </span>
                                     @endif
                                 </div>

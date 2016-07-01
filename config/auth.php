@@ -65,15 +65,10 @@ return [
     */
 
     'providers' => [
-//        'users' => [
-//            'driver' => 'eloquent',
-//            'model' => Onboardr\User::class,
-//        ],
-
-         'users' => [
-             'driver' => 'eloquent',
-             'model' => Onboardr\Organizations\Organization::class,
-         ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => \Onboardr\Users\User::class,
+        ]
     ],
 
     /*

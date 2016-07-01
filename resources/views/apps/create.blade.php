@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add An App for <strong>{{$role->name}}</strong></div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/app/roles/$role->id/apps") }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/app/organization/$orgId/apps?role_id=$role->id") }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('app') ? ' has-error' : '' }}">

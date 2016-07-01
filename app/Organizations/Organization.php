@@ -2,11 +2,11 @@
 
 namespace Onboardr\Organizations;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Onboardr\Apps\App;
 use Onboardr\Roles\Role;
 
-class Organization extends Authenticatable
+class Organization extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,16 +14,7 @@ class Organization extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+        'name', 'key'
     ];
 
     /**

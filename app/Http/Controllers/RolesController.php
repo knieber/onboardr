@@ -37,28 +37,28 @@ class RolesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param $orgId
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($orgId)
     {
-        return view('roles.create');
+        return view('roles.create', ['orgId' => $orgId]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param $orgId
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $orgId)
     {
         $name = $request->get('name');
 
-        $orgId = Auth::user()->id;
-
         $this->roleRepository->create(['name' => $name, 'organization_id' => $orgId]);
 
-        return redirect('/app/home');
+        return redirect("/app/organization/$orgId/manage");
     }
 
     /**

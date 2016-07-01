@@ -55,18 +55,29 @@ class AppsController extends Controller
     /**
      * Show the add an app page
      *
-     * @param $roleId
+     * @param Request $request
+     * @param $orgId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create($roleId)
+    public function create(Request $request, $orgId)
     {
+        $roleId = $request->get('role_id');
         $role = $this->roleRepository->find($roleId);
 
-        return view('apps.create', ['role' => $role]);
+        return view('apps.create', [
+            'role' => $role,
+            'orgId' => $orgId
+        ]);
     }
 
-    public function store($roleId, Request $request)
+    /**
+     * @param Request $request
+     * @param $orgId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(Request $request, $orgId)
     {
+        $roleId = $request->get('role_id');
         $appName = $request->get('app');
         $appEmail = $request->get('app_email');
         $appPassword = $request->get('app_password');
@@ -75,7 +86,7 @@ class AppsController extends Controller
 
         $this->appToOrganizationRepository->create([
             'app_id' => $app->id,
-            'organization_id' => Auth::user()->id,
+            'organization_id' => $orgId,
             'app_email' => $appEmail,
             'app_password' => Crypt::encrypt($appPassword)
         ]);
@@ -85,6 +96,6 @@ class AppsController extends Controller
             'role_id' => $roleId
         ]);
 
-        return redirect('/app');
+        return redirect("/app/organization/$orgId/manage");
     }
 }

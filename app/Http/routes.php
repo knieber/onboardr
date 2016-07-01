@@ -12,8 +12,23 @@ Route::group([
 ], function() {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
-    Route::resource('/roles', 'RolesController');
 
-    Route::get('/roles/{roleId}/apps', 'AppsController@create');
-    Route::post('/roles/{roleId}/apps', 'AppsController@store');
+    Route::group([
+        'prefix' => '/organization'
+    ], function() {
+
+        Route::get('/join', 'OrganizationController@pickOrg');
+        Route::post('/join', 'OrganizationController@join');
+
+        Route::group(['middleware' => 'manager'], function() {
+            Route::get('/{orgId}/manage', 'OrganizationController@manage');
+            Route::get('/{orgId}/roles/create', 'RolesController@create');
+            Route::post('/{orgId}/roles', 'RolesController@store');
+            Route::get('/{orgId}/apps', 'AppsController@create');
+            Route::post('/{orgId}/apps', 'AppsController@store');
+        });
+
+    });
+
+    Route::resource('/organization', 'OrganizationController');
 });
