@@ -5,6 +5,7 @@ namespace Onboardr\Organizations;
 use Illuminate\Database\Eloquent\Model;
 use Onboardr\Apps\App;
 use Onboardr\Roles\Role;
+use Onboardr\Users\User;
 
 class Organization extends Model
 {
@@ -33,5 +34,10 @@ class Organization extends Model
     public function apps()
     {
         return $this->belongsToMany(App::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('user_type');
     }
 }

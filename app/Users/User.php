@@ -4,6 +4,7 @@ namespace Onboardr\Users;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Onboardr\Organizations\Organization;
+use Onboardr\Roles\Role;
 
 class User extends Authenticatable
 {
@@ -15,5 +16,10 @@ class User extends Authenticatable
     public function organizations()
     {
         return $this->belongsToMany(Organization::class)->withPivot('user_type');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

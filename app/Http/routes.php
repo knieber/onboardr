@@ -19,6 +19,8 @@ Route::group([
 
         Route::get('/join', 'OrganizationController@pickOrg');
         Route::post('/join', 'OrganizationController@join');
+        Route::get('/{orgId}/select-role', 'RolesController@select');
+        Route::post('/{orgId}/select-role', 'RolesController@join');
 
         Route::group(['middleware' => 'manager'], function() {
             Route::get('/{orgId}/manage', 'OrganizationController@manage');

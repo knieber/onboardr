@@ -82,9 +82,11 @@ class OrganizationController extends Controller
     {
         $organization = $this->organizationRepo->find($id);
 
+        $roles = Auth::user()->roles;
+
         return view("organization.view", [
             'organization' => $organization,
-            'roles' => $organization->roles
+            'roles' => $roles
         ]);
     }
 
@@ -98,10 +100,7 @@ class OrganizationController extends Controller
     {
         $organization = $this->organizationRepo->find($id);
 
-        return view("organization.manage", [
-            'organization' => $organization,
-            'roles' => $organization->roles
-        ]);
+        return view("organization.manage", ['organization' => $organization]);
     }
 
     /**
@@ -155,6 +154,6 @@ class OrganizationController extends Controller
             'user_type' => 'member'
         ]);
 
-        return redirect("/app/organization/$organization->id");
+        return redirect("/app/organization/$organization->id/select-role");
     }
 }

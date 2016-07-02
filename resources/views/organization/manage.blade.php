@@ -18,7 +18,7 @@
                 </div>
 
 
-                @foreach($roles as $role)
+                @foreach($organization->roles as $role)
                     <div class="panel panel-default">
                         <div class="panel-heading">{{$role->name }}</div>
                         <div class="panel-body">
@@ -32,6 +32,19 @@
                         </div>
                     </div>
                 @endforeach
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Members Of My Org</div>
+                    <div class="panel-body">
+                        <ul>
+                            @foreach($organization->users as $user)
+                                @if($user->pivot->user_type == 'member')
+                                    <li>{{$user->name}}</li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
