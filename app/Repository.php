@@ -2,6 +2,7 @@
 
 namespace Onboardr;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

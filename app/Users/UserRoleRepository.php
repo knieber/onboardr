@@ -4,7 +4,7 @@ namespace Onboardr\Users;
 
 use DB;
 
-class UserToRoleRepository
+class UserRoleRepository
 {
     public function create(array $data)
     {

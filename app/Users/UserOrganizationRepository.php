@@ -4,7 +4,7 @@ namespace Onboardr\Users;
 
 use DB;
 
-class UserToOrganizationRepository
+class UserOrganizationRepository
 {
     public function create(array $data)
     {

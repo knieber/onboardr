@@ -16,6 +16,8 @@ class CreateAppRoleTable extends Migration
             $table->increments('id');
             $table->integer('app_id');
             $table->integer('role_id');
+            $table->string('app_email');
+            $table->string('app_password');
             $table->timestamps();
         });
     }

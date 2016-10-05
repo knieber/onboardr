@@ -5,11 +5,11 @@ namespace Onboardr\Apps;
 use Onboardr\Repository;
 use DB;
 
-class AppToOrganizationRepository
+class AppRoleRepository
 {
     public function create(array $data)
     {
-        DB::table('app_organization')
+        DB::table('app_role')
             ->insert($data);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Onboardr\Http\Requests;
 use Onboardr\Organizations\OrganizationRepository;
 use Onboardr\Roles\RoleRepository;
-use Onboardr\Users\UserToRoleRepository;
+use Onboardr\Users\UserRoleRepository;
 
 class RolesController extends Controller
 {
@@ -21,7 +21,7 @@ class RolesController extends Controller
      */
     private $organizationRepo;
     /**
-     * @var UserToRoleRepository
+     * @var UserRoleRepository
      */
     private $userToRoleRepo;
 
@@ -29,11 +29,11 @@ class RolesController extends Controller
      * RolesController constructor.
      * @param RoleRepository $roleRepository
      * @param OrganizationRepository $organizationRepo
-     * @param UserToRoleRepository $userToRoleRepo
+     * @param UserRoleRepository $userToRoleRepo
      */
     public function __construct(RoleRepository $roleRepository,
                                 OrganizationRepository $organizationRepo,
-                                UserToRoleRepository $userToRoleRepo)
+                                UserRoleRepository $userToRoleRepo)
     {
         $this->roleRepository = $roleRepository;
         $this->organizationRepo = $organizationRepo;

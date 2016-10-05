@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Onboardr\Http\Requests;
 use Onboardr\Organizations\OrganizationRepository;
-use Onboardr\Users\UserToOrganizationRepository;
+use Onboardr\Users\UserOrganizationRepository;
 
 class OrganizationController extends Controller
 {
@@ -18,20 +18,20 @@ class OrganizationController extends Controller
      */
     private $organizationRepo;
     /**
-     * @var UserToOrganizationRepository
+     * @var UserOrganizationRepository
      */
-    private $userToOrganizationRepo;
+    private $userOrganizationRepo;
 
     /**
      * OrganizationController constructor.
      * @param OrganizationRepository $organizationRepo
-     * @param UserToOrganizationRepository $userToOrganizationRepo
+     * @param UserOrganizationRepository $userOrganizationRepo
      */
     public function __construct(OrganizationRepository $organizationRepo,
-                                UserToOrganizationRepository $userToOrganizationRepo)
+                                UserOrganizationRepository $userOrganizationRepo)
     {
         $this->organizationRepo = $organizationRepo;
-        $this->userToOrganizationRepo = $userToOrganizationRepo;
+        $this->userOrganizationRepo = $userOrganizationRepo;
     }
 
     /**
@@ -63,7 +63,7 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $organization = $this->organizationRepo->create(['name' => $request->get('name')]);
-        $this->userToOrganizationRepo->create([
+        $this->userOrganizationRepo->create([
             'organization_id' => $organization->id,
             'user_id' => Auth::user()->id,
             'user_type' => 'manager'
@@ -148,7 +148,7 @@ class OrganizationController extends Controller
 
         $organization = $this->organizationRepo->findBy('key', $key);
 
-        $this->userToOrganizationRepo->create([
+        $this->userOrganizationRepo->create([
             'user_id' => Auth::user()->id,
             'organization_id' => $organization->id,
             'user_type' => 'member'

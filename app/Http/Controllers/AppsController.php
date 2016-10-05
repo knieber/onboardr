@@ -4,11 +4,9 @@ namespace Onboardr\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Onboardr\Apps\AppRepository;
-use Onboardr\Apps\AppToOrganizationRepository;
-use Onboardr\Apps\AppToRoleRepository;
+use Onboardr\Apps\AppRoleRepository;
 use Onboardr\Http\Requests;
 use Onboardr\Roles\RoleRepository;
 
@@ -20,34 +18,26 @@ class AppsController extends Controller
     private $roleRepository;
 
     /**
-     * @var AppToOrganizationRepository
-     */
-    private $appToOrganizationRepository;
-
-    /**
      * @var AppRepository
      */
     private $appRepository;
 
     /**
-     * @var AppToRoleRepository
+     * @var AppRoleRepository
      */
     private $appToRoleRepository;
 
     /**
      * AppsController constructor.
      * @param RoleRepository $roleRepository
-     * @param AppToOrganizationRepository $appToOrganizationRepository
-     * @param AppToRoleRepository $appToRoleRepository
+     * @param AppRoleRepository $appToRoleRepository
      * @param AppRepository $appRepository
      */
     public function __construct(RoleRepository $roleRepository,
-                                AppToOrganizationRepository $appToOrganizationRepository,
                                 AppRepository $appRepository,
-                                AppToRoleRepository $appToRoleRepository)
+                                AppRoleRepository $appToRoleRepository)
     {
         $this->roleRepository = $roleRepository;
-        $this->appToOrganizationRepository = $appToOrganizationRepository;
         $this->appRepository = $appRepository;
         $this->appToRoleRepository = $appToRoleRepository;
     }
@@ -82,18 +72,15 @@ class AppsController extends Controller
         $appEmail = $request->get('app_email');
         $appPassword = $request->get('app_password');
 
-        $app = $this->appRepository->findBy('name', $appName);
 
-        $this->appToOrganizationRepository->create([
-            'app_id' => $app->id,
-            'organization_id' => $orgId,
-            'app_email' => $appEmail,
-            'app_password' => Crypt::encrypt($appPassword)
-        ]);
+
+        $app = $this->appRepository->findBy('name', $appName);
 
         $this->appToRoleRepository->create([
             'app_id' => $app->id,
-            'role_id' => $roleId
+            'role_id' => $roleId,
+            'app_email' => $appEmail,
+            'app_password' => Crypt::encrypt($appPassword)
         ]);
 
         return redirect("/app/organization/$orgId/manage");
