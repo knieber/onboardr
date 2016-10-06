@@ -1,6 +1,6 @@
 <?php
 
-namespace Onboardr\Roles;
+namespace Onboardr\Apps;
 
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,7 @@ class AppRoleRepository
      */
     public function create(array $data)
     {
-        return DB::table('role_app')
+        return DB::table('app_role')
             ->insertGetId($data);
     }
 }

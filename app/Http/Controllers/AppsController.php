@@ -5,9 +5,9 @@ namespace Onboardr\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Crypt;
-use Onboardr\Roles\AppRoleOrganizationRepository;
+use Onboardr\Apps\AppRoleOrganizationRepository;
 use Onboardr\Apps\AppRepository;
-use Onboardr\Roles\AppRoleRepository;
+use Onboardr\Apps\AppRoleRepository;
 use Onboardr\Http\Requests;
 use Onboardr\Roles\RoleRepository;
 
