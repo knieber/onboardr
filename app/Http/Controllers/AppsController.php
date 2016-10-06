@@ -5,8 +5,9 @@ namespace Onboardr\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Crypt;
+use Onboardr\Roles\RoleAppOrganizationRepository;
 use Onboardr\Apps\AppRepository;
-use Onboardr\Apps\AppRoleRepository;
+use Onboardr\Roles\RoleAppRepository;
 use Onboardr\Http\Requests;
 use Onboardr\Roles\RoleRepository;
 
@@ -23,23 +24,31 @@ class AppsController extends Controller
     private $appRepository;
 
     /**
-     * @var AppRoleRepository
+     * @var RoleAppRepository
      */
     private $appToRoleRepository;
 
     /**
+     * @var RoleAppOrganizationRepository
+     */
+    private $appOrgRepo;
+
+    /**
      * AppsController constructor.
      * @param RoleRepository $roleRepository
-     * @param AppRoleRepository $appToRoleRepository
      * @param AppRepository $appRepository
+     * @param RoleAppRepository $appToRoleRepository
+     * @param RoleAppOrganizationRepository $appOrgRepo
      */
     public function __construct(RoleRepository $roleRepository,
                                 AppRepository $appRepository,
-                                AppRoleRepository $appToRoleRepository)
+                                RoleAppRepository $appToRoleRepository,
+                                RoleAppOrganizationRepository $appOrgRepo)
     {
         $this->roleRepository = $roleRepository;
         $this->appRepository = $appRepository;
         $this->appToRoleRepository = $appToRoleRepository;
+        $this->appOrgRepo = $appOrgRepo;
     }
 
     /**
@@ -71,22 +80,35 @@ class AppsController extends Controller
         $appName = $request->get('app');
         $appEmail = $request->get('app_email');
         $appPassword = $request->get('app_password');
-
-
+        $appOrganizations = explode(',', $request->get('app_organizations'));
 
         $app = $this->appRepository->findBy('name', $appName);
 
-        $this->appToRoleRepository->create([
+        $appRoleId = $this->appToRoleRepository->create([
             'app_id' => $app->id,
             'role_id' => $roleId,
             'app_email' => $appEmail,
             'app_password' => Crypt::encrypt($appPassword)
         ]);
 
+        foreach($appOrganizations as $appOrg) {
+            $this->appOrgRepo->create([
+                'app_role_id' => $appRoleId,
+                'name' => $appOrg
+            ]);
+        }
+
         return redirect("/app/organization/$orgId/manage");
     }
 
-    public function onboard(Request $request, $id)
+    public function onBoardView(Request $request, $id)
+    {
+        return view('apps.onboard', [
+
+        ]);
+    }
+
+    public function onBoard(Request $request, $id)
     {
 
     }

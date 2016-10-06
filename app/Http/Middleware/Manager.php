@@ -27,10 +27,10 @@ class Manager
      */
     public function handle($request, Closure $next)
     {
-        $org = $this->orgRepo->find($request->route()->parameters()['organization']);
+        $org = $this->orgRepo->find($request->route()->parameters()['orgId']);
 
         foreach($org->users as $user) {
-            if ($user->id == \Auth::user()->id && $user->type == 'manager') {
+            if ($user->id == \Auth::user()->id && $user->pivot->user_type == 'manager') {
                 return $next($request);
             }
         }

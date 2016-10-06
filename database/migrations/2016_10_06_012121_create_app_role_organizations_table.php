@@ -12,7 +12,7 @@ class CreateAppRoleOrganizationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_role_organizations', function (Blueprint $table) {
+        Schema::create('role_app_organizations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('app_role_id');
             $table->string('name');
@@ -27,6 +27,6 @@ class CreateAppRoleOrganizationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('table');
+        Schema::drop('role_app_organizations');
     }
 }

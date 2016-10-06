@@ -21,6 +21,15 @@ Route::group([
         Route::post('/join', 'OrganizationController@join');
         Route::get('/{orgId}/select-role', 'RolesController@select');
         Route::post('/{orgId}/select-role', 'RolesController@join');
+        Route::get('/create', 'OrganizationController@create');
+        Route::post('', 'OrganizationController@store');
+
+        Route::group([
+            'middleware' => 'member'
+        ], function() {
+            Route::get('/{organization}', 'OrganizationController@show');
+            Route::get('/{organization}/onboard', 'AppsController@onBoardView');
+        });
 
         Route::group(['middleware' => 'manager'], function() {
             Route::get('/{orgId}/manage', 'OrganizationController@manage');
@@ -29,13 +38,6 @@ Route::group([
             Route::get('/{orgId}/apps', 'AppsController@create');
             Route::post('/{orgId}/apps', 'AppsController@store');
         });
-
-    });
-
-    Route::group([
-        'middleware' => 'member'
-    ], function() {
-        Route::resource('/organization', 'OrganizationController');
 
     });
 });
