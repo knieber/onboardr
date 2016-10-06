@@ -29,6 +29,8 @@ class Organization extends Model
     }
 
     /**
+     * Return all apps that are associated to the organization
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function apps()
@@ -36,6 +38,11 @@ class Organization extends Model
         return $this->belongsToMany(App::class);
     }
 
+    /**
+     * Return all users that are associated the organization
+     *
+     * @return $this
+     */
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('user_type');

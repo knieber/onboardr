@@ -8,13 +8,19 @@ use Onboardr\Roles\Role;
 
 class App extends Model
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany | Organization
+     */
     public function organizations()
     {
-        $this->belongsToMany(Organization::class);
+        return $this->belongsToMany(Organization::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany | Role
+     */
     public function roles()
     {
-        $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class);
     }
 }

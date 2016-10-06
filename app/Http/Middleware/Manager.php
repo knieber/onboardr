@@ -4,9 +4,20 @@ namespace Onboardr\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Onboardr\Organizations\Organization;
+use Onboardr\Organizations\OrganizationRepository;
 
 class Manager
 {
+    /** @var OrganizationRepository */
+    private $orgRepo;
+
+    public function __construct(OrganizationRepository $orgRepo)
+    {
+
+        $this->orgRepo = $orgRepo;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -16,8 +27,14 @@ class Manager
      */
     public function handle($request, Closure $next)
     {
-        // Figure out if auth use if a manager or member
+        $org = $this->orgRepo->find($request->route()->parameters()['organization']);
 
-        return $next($request);
+        foreach($org->users as $user) {
+            if ($user->id == \Auth::user()->id && $user->type == 'manager') {
+                return $next($request);
+            }
+        }
+
+        return redirect("/app/");
     }
 }

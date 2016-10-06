@@ -85,4 +85,9 @@ class AppsController extends Controller
 
         return redirect("/app/organization/$orgId/manage");
     }
+
+    public function onboard(Request $request, $id)
+    {
+
+    }
 }

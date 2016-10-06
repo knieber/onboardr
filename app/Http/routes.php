@@ -32,5 +32,10 @@ Route::group([
 
     });
 
-    Route::resource('/organization', 'OrganizationController');
+    Route::group([
+        'middleware' => 'member'
+    ], function() {
+        Route::resource('/organization', 'OrganizationController');
+
+    });
 });

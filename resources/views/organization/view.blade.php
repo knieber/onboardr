@@ -16,7 +16,7 @@
                             <strong>Apps:</strong>
                             <ul>
                                 @foreach($role->apps as $app)
-                                    <li>{{$app->name}}</li>
+                                    <li><a href={{ url("") }}>{{$app->name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
