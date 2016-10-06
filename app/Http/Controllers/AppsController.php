@@ -5,9 +5,9 @@ namespace Onboardr\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Crypt;
-use Onboardr\Roles\RoleAppOrganizationRepository;
+use Onboardr\Roles\AppRoleOrganizationRepository;
 use Onboardr\Apps\AppRepository;
-use Onboardr\Roles\RoleAppRepository;
+use Onboardr\Roles\AppRoleRepository;
 use Onboardr\Http\Requests;
 use Onboardr\Roles\RoleRepository;
 
@@ -24,12 +24,12 @@ class AppsController extends Controller
     private $appRepository;
 
     /**
-     * @var RoleAppRepository
+     * @var AppRoleRepository
      */
     private $appToRoleRepository;
 
     /**
-     * @var RoleAppOrganizationRepository
+     * @var AppRoleOrganizationRepository
      */
     private $appOrgRepo;
 
@@ -37,13 +37,13 @@ class AppsController extends Controller
      * AppsController constructor.
      * @param RoleRepository $roleRepository
      * @param AppRepository $appRepository
-     * @param RoleAppRepository $appToRoleRepository
-     * @param RoleAppOrganizationRepository $appOrgRepo
+     * @param AppRoleRepository $appToRoleRepository
+     * @param AppRoleOrganizationRepository $appOrgRepo
      */
     public function __construct(RoleRepository $roleRepository,
                                 AppRepository $appRepository,
-                                RoleAppRepository $appToRoleRepository,
-                                RoleAppOrganizationRepository $appOrgRepo)
+                                AppRoleRepository $appToRoleRepository,
+                                AppRoleOrganizationRepository $appOrgRepo)
     {
         $this->roleRepository = $roleRepository;
         $this->appRepository = $appRepository;

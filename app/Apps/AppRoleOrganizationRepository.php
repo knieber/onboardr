@@ -4,7 +4,7 @@ namespace Onboardr\Roles;
 
 use Illuminate\Support\Facades\DB;
 
-class RoleAppOrganizationRepository
+class AppRoleOrganizationRepository
 {
     /**
      * @param array $data
